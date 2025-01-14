@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import '../styles/globals.css';
-
+import Link from 'next/link';
 function MyApp({ Component, pageProps }) {
     const router = useRouter();
 
@@ -15,8 +15,8 @@ function MyApp({ Component, pageProps }) {
     return (
         <>
             <nav>
-                <a href="/tasks">Tasks</a>
-                <a href="/admin">Admin</a>
+                <Link href="/tasks">Tasks</Link>
+                <Link href="/admin">Admin</Link>
                 <button onClick={() => {
                     localStorage.removeItem('access');
                     localStorage.removeItem('refresh');
