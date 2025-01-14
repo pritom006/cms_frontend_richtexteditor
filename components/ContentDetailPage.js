@@ -50,58 +50,82 @@ const ContentDetailPage = () => {
     };
 
     if (loading) {
-        return <p>Loading...</p>;
+        return <p className="text-center text-gray-500">Loading...</p>;
     }
 
     if (error) {
-        return <p style={{ color: 'red' }}>{error}</p>;
+        return <p className="text-center text-red-500">{error}</p>;
     }
 
     return content ? (
-        <div>
-            <h1>Content Details</h1>
-            <h2>{content.title}</h2>
-            <p>{content.content}</p>
-            <p>Status: {content.status}</p>
-            <p>Created by: {content.created_by}</p>
-            <p>Last modified by: {content.last_modified_by}</p>
+        <div className="min-h-screen bg-gradient-to-r from-teal-400 to-blue-500 p-8 flex flex-col items-center">
+            <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-4xl">
+                <h1 className="text-3xl font-semibold text-gray-800 text-center mb-4">Content Details</h1>
 
-            {content.status !== 'APPROVED' && (
-                <form onSubmit={handleUpdate}>
-                    <input
-                        type="text"
-                        placeholder="Title"
-                        value={content.title}
-                        onChange={(e) => setContent({ ...content, title: e.target.value })}
-                        required
-                    />
-                    <textarea
-                        placeholder="Content"
-                        value={content.content}
-                        onChange={(e) => setContent({ ...content, content: e.target.value })}
-                        required
-                    />
-                    <button type="submit">Update Content</button>
-                </form>
-            )}
+                <div className="mb-6">
+                    <h2 className="text-2xl font-bold text-gray-800">{content.title}</h2>
+                    <p className="text-gray-600 mt-2">{content.content}</p>
+                    <p className="text-sm text-gray-500 mt-2">Status: <span className="font-semibold">{content.status}</span></p>
+                    <p className="text-sm text-gray-500">Created by: <span className="font-semibold">{content.created_by}</span></p>
+                    <p className="text-sm text-gray-500">Last modified by: <span className="font-semibold">{content.last_modified_by}</span></p>
+                </div>
 
-            <h2>Feedback</h2>
-            <ul>
-                {feedbacks.length > 0 ? (
-                    feedbacks.map((feedback) => (
-                        <li key={feedback.id}>
-                            <p>{feedback.comment}</p>
-                            <p>By User ID: {feedback.user}</p>
-                            <p>Created at: {feedback.created_at}</p>
-                        </li>
-                    ))
-                ) : (
-                    <p>No feedback available.</p>
+                {content.status !== 'APPROVED' && (
+                    <form onSubmit={handleUpdate} className="space-y-6">
+                        <div>
+                            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">Title</label>
+                            <input
+                                type="text"
+                                id="title"
+                                placeholder="Enter content title"
+                                value={content.title}
+                                onChange={(e) => setContent({ ...content, title: e.target.value })}
+                                required
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition duration-200"
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-2">Content</label>
+                            <textarea
+                                id="content"
+                                placeholder="Enter content"
+                                value={content.content}
+                                onChange={(e) => setContent({ ...content, content: e.target.value })}
+                                required
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition duration-200"
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="w-full bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
+                        >
+                            Update Content
+                        </button>
+                    </form>
                 )}
-            </ul>
+
+                <div className="mt-8">
+                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Feedback</h2>
+                    {feedbacks.length > 0 ? (
+                        <ul className="space-y-4">
+                            {feedbacks.map((feedback) => (
+                                <li key={feedback.id} className="bg-white p-6 rounded-lg shadow-md">
+                                    <p className="text-gray-700">{feedback.comment}</p>
+                                    <p className="text-sm text-gray-500 mt-2">By User ID: {feedback.user}</p>
+                                    <p className="text-sm text-gray-500">Created at: {feedback.created_at}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p className="text-gray-500">No feedback available.</p>
+                    )}
+                </div>
+            </div>
         </div>
     ) : (
-        <p>Content not found.</p>
+        <p className="text-center text-red-500">Content not found.</p>
     );
 };
 

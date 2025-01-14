@@ -1,0 +1,13 @@
+/* Tailwind Base styles */
+@tailwind base;
+
+/* Tailwind Components */
+@tailwind components;
+
+/* Tailwind Utility classes */
+@tailwind utilities;
+
+/* You can also add custom global styles below */
+body {
+  font-family: 'Arial', sans-serif; /* Optional, add a custom font */
+}

@@ -38,16 +38,17 @@ const Register = () => {
     };
 
     return (
-        <div>
-            <h1>Register</h1>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <form onSubmit={handleRegister}>
+        <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg">
+            <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">Register</h1>
+            {error && <p className="text-red-600 mb-4">{error}</p>}
+            <form onSubmit={handleRegister} className="space-y-4">
                 <input
                     type="text"
                     placeholder="Username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <input
                     type="email"
@@ -55,6 +56,7 @@ const Register = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <input
                     type="text"
@@ -62,6 +64,7 @@ const Register = () => {
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                     required
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <input
                     type="text"
@@ -69,6 +72,7 @@ const Register = () => {
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     required
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <input
                     type="password"
@@ -76,6 +80,7 @@ const Register = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <input
                     type="password"
@@ -83,18 +88,25 @@ const Register = () => {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <select
                     value={role}
                     onChange={(e) => setRole(e.target.value)}
                     required
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                     <option value="" disabled>Select Role</option>
                     <option value="1">Admin</option>
                     <option value="2">Manager</option>
                     <option value="3">Content Writer</option>
                 </select>
-                <button type="submit">Register</button>
+                <button
+                    type="submit"
+                    className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                    Register
+                </button>
             </form>
         </div>
     );
