@@ -9,6 +9,7 @@ const Admin = () => {
     const [description, setDescription] = useState('');
     const [assignedTo, setAssignedTo] = useState('');
     const [contentId, setContentId] = useState('');
+    const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchUsersAndContents = async () => {
@@ -40,19 +41,28 @@ const Admin = () => {
     const handleAssignTask = async (e) => {
         e.preventDefault();
         try {
-            await axiosInstance.post('tasks/', {
+            const response = await axiosInstance.post('tasks/', { // Corrected opening quotation mark
                 title,
                 description,
-                assigned_to: assignedTo,
-                content_id: contentId,
+                assigned_to: parseInt(assignedTo, 10), // Convert to integer
+                content_id: parseInt(contentId, 10), // Convert to integer for consistency
             });
+            
+            console.log('Task creation successful:', response.data);
+            
+            // Clear form after successful submission
+            setTitle('');
+            setDescription('');
+            setAssignedTo('');
+            setContentId('');
+            
             alert('Task assigned successfully');
         } catch (error) {
-            console.error('Failed to assign task', error);
+            console.error('Failed to assign task:', error);
             if (error.response) {
-                console.error('Error Response:', error.response.data); // Log the detailed error response
+                console.error('Error Response:', error.response.data);
             }
-            alert('Failed to assign task');
+            setError(error.response?.data?.message || 'Failed to assign task');
         }
     };
 
